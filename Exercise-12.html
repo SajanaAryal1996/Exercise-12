@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exercise-12</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Exercise-12_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Exercise-12_files/libs/quarto-html/quarto.js"></script>
+<script src="Exercise-12_files/libs/quarto-html/popper.min.js"></script>
+<script src="Exercise-12_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Exercise-12_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Exercise-12_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Exercise-12_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Exercise-12_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Exercise-12_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Exercise-12_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Exercise-12</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="preliminaries" class="level4">
+<h4 class="anchored" data-anchor-id="preliminaries"><strong>Preliminaries</strong></h4>
+<ul>
+<li><p>Set up a new <strong><em>GitHub</em></strong> repo in your <strong><em>GitHub</em></strong> workspace named “exercise-12” and clone that down to your computer as a new <strong><em>RStudio</em></strong> project. The instructions outlined as <strong>Method 1</strong> in <a href="https://difiore.github.io/ada-2024/06-module.html"><strong>Module 6</strong></a> will be helpful.</p></li>
+<li><p>Using the {tidyverse} <code>read_csv()</code> function, load the “Mammal_lifehistories_v2.txt” dataset from <a href="https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Mammal_lifehistories_v2.txt">this URL</a> as a “tibble” named <strong>d</strong>. As discussed in class, this is dataset that compiles life history and other variables for over 1400 species of placental mammals from 17 different Orders.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Mammal_lifehistories_v2.txt"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 1440 Columns: 14
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (4): order, family, Genus, species
+dbl (9): mass(g), gestation(mo), newborn(g), weaning(mo), wean mass(g), AFR(...
+num (1): refs
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "order"         "family"        "Genus"         "species"      
+ [5] "mass(g)"       "gestation(mo)" "newborn(g)"    "weaning(mo)"  
+ [9] "wean mass(g)"  "AFR(mo)"       "max. life(mo)" "litter size"  
+[13] "litters/year"  "refs"         </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "order"         "family"        "Genus"         "species"      
+ [5] "mass(g)"       "gestation(mo)" "newborn(g)"    "weaning(mo)"  
+ [9] "wean mass(g)"  "AFR(mo)"       "max. life(mo)" "litter size"  
+[13] "litters/year"  "refs"         </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+  order        family       Genus species `mass(g)` `gestation(mo)` `newborn(g)`
+  &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+1 Artiodactyla Antilocapri… Anti… americ…     45375            8.13        3246.
+2 Artiodactyla Bovidae      Addax nasoma…    182375            9.39        5480 
+3 Artiodactyla Bovidae      Aepy… melamp…     41480            6.35        5093 
+4 Artiodactyla Bovidae      Alce… busela…    150000            7.9        10167.
+5 Artiodactyla Bovidae      Ammo… clarkei     28500            6.8         -999 
+6 Artiodactyla Bovidae      Ammo… lervia      55500            5.08        3810 
+# ℹ 7 more variables: `weaning(mo)` &lt;dbl&gt;, `wean mass(g)` &lt;dbl&gt;,
+#   `AFR(mo)` &lt;dbl&gt;, `max. life(mo)` &lt;dbl&gt;, `litter size` &lt;dbl&gt;,
+#   `litters/year` &lt;dbl&gt;, refs &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="challenge" class="level2">
+<h2 class="anchored" data-anchor-id="challenge"><strong>Challenge</strong></h2>
+<p>Step 1:Replace all values of -999 (the authors’ code for missing data) with <code>NA</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace all values of -999 with NA</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">replace_with_na_all</span>(d, <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">==</span> <span class="sc">-</span><span class="dv">999</span>) </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the first few rows of the resulting dataset</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+  order        family       Genus species `mass(g)` `gestation(mo)` `newborn(g)`
+  &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+1 Artiodactyla Antilocapri… Anti… americ…     45375            8.13        3246.
+2 Artiodactyla Bovidae      Addax nasoma…    182375            9.39        5480 
+3 Artiodactyla Bovidae      Aepy… melamp…     41480            6.35        5093 
+4 Artiodactyla Bovidae      Alce… busela…    150000            7.9        10167.
+5 Artiodactyla Bovidae      Ammo… clarkei     28500            6.8           NA 
+6 Artiodactyla Bovidae      Ammo… lervia      55500            5.08        3810 
+# ℹ 7 more variables: `weaning(mo)` &lt;dbl&gt;, `wean mass(g)` &lt;dbl&gt;,
+#   `AFR(mo)` &lt;dbl&gt;, `max. life(mo)` &lt;dbl&gt;, `litter size` &lt;dbl&gt;,
+#   `litters/year` &lt;dbl&gt;, refs &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the entire resulting dataset</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,440 × 14
+   order        family      Genus species `mass(g)` `gestation(mo)` `newborn(g)`
+   &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Artiodactyla Antilocapr… Anti… americ…    45375             8.13        3246.
+ 2 Artiodactyla Bovidae     Addax nasoma…   182375             9.39        5480 
+ 3 Artiodactyla Bovidae     Aepy… melamp…    41480             6.35        5093 
+ 4 Artiodactyla Bovidae     Alce… busela…   150000             7.9        10167.
+ 5 Artiodactyla Bovidae     Ammo… clarkei    28500             6.8           NA 
+ 6 Artiodactyla Bovidae     Ammo… lervia     55500             5.08        3810 
+ 7 Artiodactyla Bovidae     Anti… marsup…    30000             5.72        3910 
+ 8 Artiodactyla Bovidae     Anti… cervic…    37500             5.5         3846 
+ 9 Artiodactyla Bovidae     Bison bison     497667.            8.93       20000 
+10 Artiodactyla Bovidae     Bison bonasus   500000             9.14       23000.
+# ℹ 1,430 more rows
+# ℹ 7 more variables: `weaning(mo)` &lt;dbl&gt;, `wean mass(g)` &lt;dbl&gt;,
+#   `AFR(mo)` &lt;dbl&gt;, `max. life(mo)` &lt;dbl&gt;, `litter size` &lt;dbl&gt;,
+#   `litters/year` &lt;dbl&gt;, refs &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "order"         "family"        "Genus"         "species"      
+ [5] "mass(g)"       "gestation(mo)" "newborn(g)"    "weaning(mo)"  
+ [9] "wean mass(g)"  "AFR(mo)"       "max. life(mo)" "litter size"  
+[13] "litters/year"  "refs"         </code></pre>
+</div>
+</div>
+<p>Step 2:Drop the variables <strong>litter size</strong> and <strong>refs</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#drop variables as suggesteed</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> d1 <span class="sc">%&gt;%</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"litter size"</span>, <span class="st">"refs"</span>))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the structure of the resulting dataset</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [1,440 × 12] (S3: tbl_df/tbl/data.frame)
+ $ order        : chr [1:1440] "Artiodactyla" "Artiodactyla" "Artiodactyla" "Artiodactyla" ...
+ $ family       : chr [1:1440] "Antilocapridae" "Bovidae" "Bovidae" "Bovidae" ...
+ $ Genus        : chr [1:1440] "Antilocapra" "Addax" "Aepyceros" "Alcelaphus" ...
+ $ species      : chr [1:1440] "americana" "nasomaculatus" "melampus" "buselaphus" ...
+ $ mass(g)      : num [1:1440] 45375 182375 41480 150000 28500 ...
+ $ gestation(mo): num [1:1440] 8.13 9.39 6.35 7.9 6.8 5.08 5.72 5.5 8.93 9.14 ...
+ $ newborn(g)   : num [1:1440] 3246 5480 5093 10167 NA ...
+ $ weaning(mo)  : num [1:1440] 3 6.5 5.63 6.5 NA ...
+ $ wean mass(g) : num [1:1440] 8900 NA 15900 NA NA ...
+ $ AFR(mo)      : num [1:1440] 13.5 27.3 16.7 23 NA ...
+ $ max. life(mo): num [1:1440] 142 308 213 240 NA 251 228 255 300 324 ...
+ $ litters/year : num [1:1440] 1 0.99 0.95 NA NA 2 NA 1.89 1 1 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the first few rows of the resulting dataset</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 12
+  order        family       Genus species `mass(g)` `gestation(mo)` `newborn(g)`
+  &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+1 Artiodactyla Antilocapri… Anti… americ…     45375            8.13        3246.
+2 Artiodactyla Bovidae      Addax nasoma…    182375            9.39        5480 
+3 Artiodactyla Bovidae      Aepy… melamp…     41480            6.35        5093 
+4 Artiodactyla Bovidae      Alce… busela…    150000            7.9        10167.
+5 Artiodactyla Bovidae      Ammo… clarkei     28500            6.8           NA 
+6 Artiodactyla Bovidae      Ammo… lervia      55500            5.08        3810 
+# ℹ 5 more variables: `weaning(mo)` &lt;dbl&gt;, `wean mass(g)` &lt;dbl&gt;,
+#   `AFR(mo)` &lt;dbl&gt;, `max. life(mo)` &lt;dbl&gt;, `litters/year` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Step 3: Log transform <strong>all</strong> of the other numeric variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> d1 <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> <span class="fu">log</span>(. <span class="sc">+</span> <span class="dv">1</span>)))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,440 × 12
+   order        family      Genus species `mass(g)` `gestation(mo)` `newborn(g)`
+   &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Artiodactyla Antilocapr… Anti… americ…      10.7            2.21         8.09
+ 2 Artiodactyla Bovidae     Addax nasoma…      12.1            2.34         8.61
+ 3 Artiodactyla Bovidae     Aepy… melamp…      10.6            1.99         8.54
+ 4 Artiodactyla Bovidae     Alce… busela…      11.9            2.19         9.23
+ 5 Artiodactyla Bovidae     Ammo… clarkei      10.3            2.05        NA   
+ 6 Artiodactyla Bovidae     Ammo… lervia       10.9            1.81         8.25
+ 7 Artiodactyla Bovidae     Anti… marsup…      10.3            1.91         8.27
+ 8 Artiodactyla Bovidae     Anti… cervic…      10.5            1.87         8.26
+ 9 Artiodactyla Bovidae     Bison bison        13.1            2.30         9.90
+10 Artiodactyla Bovidae     Bison bonasus      13.1            2.32        10.0 
+# ℹ 1,430 more rows
+# ℹ 5 more variables: `weaning(mo)` &lt;dbl&gt;, `wean mass(g)` &lt;dbl&gt;,
+#   `AFR(mo)` &lt;dbl&gt;, `max. life(mo)` &lt;dbl&gt;, `litters/year` &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "order"         "family"        "Genus"         "species"      
+ [5] "mass(g)"       "gestation(mo)" "newborn(g)"    "weaning(mo)"  
+ [9] "wean mass(g)"  "AFR(mo)"       "max. life(mo)" "litters/year" </code></pre>
+</div>
+</div>
+<p>Step 4: Regress the (now log transformed) age [<strong>gestation(mo)</strong>, <strong>weaning(mo)</strong>, <strong>AFR(mo)</strong> (age at first reproduction), and <strong>max. life(mo)</strong> (maximum lifespan)] and mass [<strong>newborn(g)</strong> and <strong>wean mass(g)</strong>] variables on (now log transformed) overall body <strong>mass(g)</strong> and add the residuals to the dataframe as new variables (<strong>relGest</strong>, <strong>relWean</strong>, <strong>relAFR</strong>, <strong>relLife</strong>, <strong>relNewbornMass</strong>, and <strong>relWeaningMass</strong>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># d1 is the log transformed dataset</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the regressions and add residuals to the dataframe</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> d1 <span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">relGest =</span> <span class="fu">resid</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">na.action =</span> na.exclude)),</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">relWean =</span> <span class="fu">resid</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">na.action =</span> na.exclude)),</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">relAFR =</span> <span class="fu">resid</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">AFR(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">na.action =</span> na.exclude)),</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">relLife =</span> <span class="fu">resid</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">na.action =</span> na.exclude)),</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">relNewbornMass =</span> <span class="fu">resid</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">na.action =</span> na.exclude)),</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">relWeaningMass =</span> <span class="fu">resid</span>(<span class="fu">lm</span>(<span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">na.action =</span> na.exclude))</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># View the updated dataframe</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,440 × 18
+   order        family      Genus species `mass(g)` `gestation(mo)` `newborn(g)`
+   &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Artiodactyla Antilocapr… Anti… americ…      10.7            2.21         8.09
+ 2 Artiodactyla Bovidae     Addax nasoma…      12.1            2.34         8.61
+ 3 Artiodactyla Bovidae     Aepy… melamp…      10.6            1.99         8.54
+ 4 Artiodactyla Bovidae     Alce… busela…      11.9            2.19         9.23
+ 5 Artiodactyla Bovidae     Ammo… clarkei      10.3            2.05        NA   
+ 6 Artiodactyla Bovidae     Ammo… lervia       10.9            1.81         8.25
+ 7 Artiodactyla Bovidae     Anti… marsup…      10.3            1.91         8.27
+ 8 Artiodactyla Bovidae     Anti… cervic…      10.5            1.87         8.26
+ 9 Artiodactyla Bovidae     Bison bison        13.1            2.30         9.90
+10 Artiodactyla Bovidae     Bison bonasus      13.1            2.32        10.0 
+# ℹ 1,430 more rows
+# ℹ 11 more variables: `weaning(mo)` &lt;dbl&gt;, `wean mass(g)` &lt;dbl&gt;,
+#   `AFR(mo)` &lt;dbl&gt;, `max. life(mo)` &lt;dbl&gt;, `litters/year` &lt;dbl&gt;,
+#   relGest &lt;dbl&gt;, relWean &lt;dbl&gt;, relAFR &lt;dbl&gt;, relLife &lt;dbl&gt;,
+#   relNewbornMass &lt;dbl&gt;, relWeaningMass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Step 5: Plot residuals of max lifespan (<strong>relLife</strong>) in relation to <strong>Order</strong>. Which mammalian orders have the highest residual lifespan?</p>
+<ul>
+<li><p>Plot residuals of newborn mass (<strong>relNewbornMass</strong>) in relation to <strong>Order</strong>. Which mammalian orders have the have highest residual newborn mass?</p></li>
+<li><p>Plot residuals of weaning mass (<strong>relWeaningMass</strong>) in relation to <strong>Order</strong>. Which mammalian orders have the have highest relative weaning mass?</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals of max lifespan (relLife) in relation to Order</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d1, <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> relLife)) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightgreen"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span>  <span class="co"># Adding jitter points</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mammalian Order"</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Residual Max Lifespan"</span>) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Exercise-12_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals of newborn mass</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d1 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(relNewbornMass)), <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> relNewbornMass)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span>  <span class="co"># Adding jitter points</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Mammalian Order"</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Residual Newborn Mass"</span>) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Exercise-12_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals of weaning mass (relWeaningMass) in relation to Order</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d1, <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> relWeaningMass)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span>  <span class="co"># Adding jitter points</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Mammalian Order"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Residual Weaning Mass"</span>) <span class="sc">+</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Exercise-12_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><p>From the above boxplot, it can be concluded ‘Primates’ mammalian order has highest residual lifespan.</p></li>
+<li><p>From the above boxplot, it can be concluded ‘Rodentia’ mammalian order has maximum newborn mass.</p></li>
+<li><p>From the above boxplot, it can be concluded ‘Carnivora’ mammalian order has highest weaning mass.</p></li>
+</ul>
+<p>Step 6:Run models and a model selection process to evaluate what (now log transformed) variables best predict each of the two response variables, <strong>max. life(mo)</strong> and <strong>AFR(mo)</strong>, from the set of the following predictors: <strong>gestation(mo)</strong>, <strong>newborn(g)</strong>, <strong>weaning(mo)</strong>, <strong>wean mass(g)</strong>, <strong>litters/year</strong>, and overall body <strong>mass(g)</strong>.</p>
+<blockquote class="blockquote">
+<p><strong>HINT:</strong> Before running models, winnow your dataset to drop rows that are missing the respective response variable or any of the predictors, e.g., by using <code>drop_na()</code>.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Winnow the dataset to drop rows with missing values</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Dropping rows with missing values for selected variables</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>d1_NEW <span class="ot">&lt;-</span> d1 <span class="sc">|&gt;</span> <span class="fu">drop_na</span>(<span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span>, <span class="st">`</span><span class="at">AFR(mo)</span><span class="st">`</span>, <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span>, <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span>, <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span>, <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span>, <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span>, <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>d1_NEW</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 206 × 18
+   order        family      Genus species `mass(g)` `gestation(mo)` `newborn(g)`
+   &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Artiodactyla Antilocapr… Anti… americ…     10.7             2.21         8.09
+ 2 Artiodactyla Bovidae     Aepy… melamp…     10.6             1.99         8.54
+ 3 Artiodactyla Bovidae     Bison bison       13.1             2.30         9.90
+ 4 Artiodactyla Bovidae     Gaze… subgut…     10.1             1.85         7.79
+ 5 Artiodactyla Bovidae     Kobus kob         11.0             2.24         8.50
+ 6 Artiodactyla Bovidae     Mado… kirkii       8.49            1.91         6.48
+ 7 Artiodactyla Bovidae     Ovis  canade…     11.1             1.94         8.36
+ 8 Artiodactyla Bovidae     Saiga tatari…     10.6             1.78         8.12
+ 9 Artiodactyla Bovidae     Sync… caffer      13.1             2.49        10.7 
+10 Artiodactyla Camelidae   Came… dromed…     13.0             2.61        10.5 
+# ℹ 196 more rows
+# ℹ 11 more variables: `weaning(mo)` &lt;dbl&gt;, `wean mass(g)` &lt;dbl&gt;,
+#   `AFR(mo)` &lt;dbl&gt;, `max. life(mo)` &lt;dbl&gt;, `litters/year` &lt;dbl&gt;,
+#   relGest &lt;dbl&gt;, relWean &lt;dbl&gt;, relAFR &lt;dbl&gt;, relLife &lt;dbl&gt;,
+#   relNewbornMass &lt;dbl&gt;, relWeaningMass &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a linear regression model for max. life(mo)</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `max. life(mo)` ~ `gestation(mo)` + `newborn(g)` + 
+    `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, 
+    data = d1_NEW)
+
+Coefficients:
+    (Intercept)  `gestation(mo)`     `newborn(g)`    `weaning(mo)`  
+        3.88338          0.39321         -0.06489          0.17541  
+ `wean mass(g)`   `litters/year`        `mass(g)`  
+        0.03652         -0.47733          0.11067  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FORWARD MODEL SELECTION for max. life(mo)</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with an intercept-only model</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>m_null <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="dv">1</span>) </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m_null, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`max. life(mo)` ~ 1
+                Df Sum of Sq     RSS      AIC F value    Pr(&gt;F)    
+&lt;none&gt;                       166.420  -41.952                      
+`gestation(mo)`  1   108.360  58.061 -256.876  380.73 &lt; 2.2e-16 ***
+`newborn(g)`     1   103.585  62.835 -240.596  336.30 &lt; 2.2e-16 ***
+`weaning(mo)`    1    86.731  79.689 -191.646  222.03 &lt; 2.2e-16 ***
+`wean mass(g)`   1   109.221  57.199 -259.956  389.54 &lt; 2.2e-16 ***
+`litters/year`   1    91.484  74.937 -204.313  249.05 &lt; 2.2e-16 ***
+`mass(g)`        1   107.604  58.816 -254.212  373.22 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use add1() to test and add predictors:</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">update</span>(m_null, <span class="at">formula =</span> .<span class="sc">~</span>. <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span>) <span class="co"># wean mass (g) has a higher F value</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `max. life(mo)` ~ `wean mass(g)`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.60068 -0.35433 -0.01529  0.37774  1.29739 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     3.50623    0.08729   40.17   &lt;2e-16 ***
+`wean mass(g)`  0.23446    0.01188   19.74   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5295 on 204 degrees of freedom
+Multiple R-squared:  0.6563,    Adjusted R-squared:  0.6546 
+F-statistic: 389.5 on 1 and 204 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m1, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`max. life(mo)` ~ `wean mass(g)`
+                Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;                       57.199 -259.96                      
+`gestation(mo)`  1    6.7059 50.493 -283.64 26.9602 5.029e-07 ***
+`newborn(g)`     1    0.0088 57.190 -257.99  0.0313    0.8598    
+`weaning(mo)`    1   11.3808 45.818 -303.66 50.4234 2.044e-11 ***
+`litters/year`   1   10.8140 46.385 -301.12 47.3266 7.296e-11 ***
+`mass(g)`        1    0.2588 56.940 -258.89  0.9227    0.3379    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">update</span>(m1, <span class="at">formula =</span> .<span class="sc">~</span>. <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> ) <span class="co"># weaning(mo) has the highest F value</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `max. life(mo)` ~ `wean mass(g)` + `weaning(mo)`, 
+    data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.52628 -0.29115  0.02328  0.28970  1.13114 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     3.41005    0.07948  42.906  &lt; 2e-16 ***
+`wean mass(g)`  0.17071    0.01394  12.250  &lt; 2e-16 ***
+`weaning(mo)`   0.38374    0.05404   7.101 2.04e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4751 on 203 degrees of freedom
+Multiple R-squared:  0.7247,    Adjusted R-squared:  0.722 
+F-statistic: 267.2 on 2 and 203 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m2, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`max. life(mo)` ~ `wean mass(g)` + `weaning(mo)`
+                Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;                       45.818 -303.66                      
+`gestation(mo)`  1    1.1042 44.714 -306.68  4.9885   0.02661 *  
+`newborn(g)`     1    0.0014 45.817 -301.66  0.0063   0.93693    
+`litters/year`   1    3.5487 42.270 -318.26 16.9586 5.568e-05 ***
+`mass(g)`        1    0.5582 45.260 -304.18  2.4915   0.11603    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">update</span>(m2, <span class="at">formula =</span> .<span class="sc">~</span>. <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> ) <span class="co"># litters/year has the highest value</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `max. life(mo)` ~ `wean mass(g)` + `weaning(mo)` + 
+    `litters/year`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.59467 -0.24376 -0.01748  0.28558  1.29549 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     4.19688    0.20582  20.391  &lt; 2e-16 ***
+`wean mass(g)`  0.14490    0.01481   9.784  &lt; 2e-16 ***
+`weaning(mo)`   0.26423    0.05958   4.435 1.51e-05 ***
+`litters/year` -0.52819    0.12826  -4.118 5.57e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4574 on 202 degrees of freedom
+Multiple R-squared:  0.746, Adjusted R-squared:  0.7422 
+F-statistic: 197.8 on 3 and 202 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m3, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`max. life(mo)` ~ `wean mass(g)` + `weaning(mo)` + `litters/year`
+                Df Sum of Sq    RSS     AIC F value  Pr(&gt;F)  
+&lt;none&gt;                       42.270 -318.26                  
+`gestation(mo)`  1   1.17962 41.090 -322.10  5.7703 0.01721 *
+`newborn(g)`     1   0.17683 42.093 -317.13  0.8444 0.35925  
+`mass(g)`        1   0.32617 41.943 -317.86  1.5630 0.21267  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">update</span>(m3, <span class="at">formula =</span> .<span class="sc">~</span>. <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> ) <span class="co"># gestation(mo) has the highest F value</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `max. life(mo)` ~ `wean mass(g)` + `weaning(mo)` + 
+    `litters/year` + `gestation(mo)`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.57618 -0.27048 -0.00628  0.32401  1.15331 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       4.1911     0.2034  20.600  &lt; 2e-16 ***
+`wean mass(g)`    0.1051     0.0221   4.756 3.76e-06 ***
+`weaning(mo)`     0.1921     0.0661   2.906  0.00407 ** 
+`litters/year`   -0.5339     0.1268  -4.210 3.84e-05 ***
+`gestation(mo)`   0.2655     0.1105   2.402  0.01721 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4521 on 201 degrees of freedom
+Multiple R-squared:  0.7531,    Adjusted R-squared:  0.7482 
+F-statistic: 153.3 on 4 and 201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m4, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`max. life(mo)` ~ `wean mass(g)` + `weaning(mo)` + `litters/year` + 
+    `gestation(mo)`
+             Df Sum of Sq    RSS     AIC F value  Pr(&gt;F)  
+&lt;none&gt;                    41.090 -322.10                  
+`newborn(g)`  1   0.07104 41.019 -320.45  0.3464 0.55683  
+`mass(g)`     1   0.60587 40.484 -323.16  2.9931 0.08516 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># mass (g) has high F value, but the results are not significant.</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Hence, once we add gestation, litters/year, wean mass(g), and weaning(mo), the results do not significantly improve the fit of the model. Therefore, the final, best model in this case is m4</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is the best model predicted using forward selection:</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>`max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + `wean mass(g)` + 
+    `litters/year`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `max. life(mo)` ~ `wean mass(g)` + `weaning(mo)` + 
+    `litters/year` + `gestation(mo)`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.57618 -0.27048 -0.00628  0.32401  1.15331 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       4.1911     0.2034  20.600  &lt; 2e-16 ***
+`wean mass(g)`    0.1051     0.0221   4.756 3.76e-06 ***
+`weaning(mo)`     0.1921     0.0661   2.906  0.00407 ** 
+`litters/year`   -0.5339     0.1268  -4.210 3.84e-05 ***
+`gestation(mo)`   0.2655     0.1105   2.402  0.01721 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4521 on 201 degrees of freedom
+Multiple R-squared:  0.7531,    Adjusted R-squared:  0.7482 
+F-statistic: 153.3 on 4 and 201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FORWARD MODEL SELECTION for AFR(mo) response variable</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a linear regression model</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">AFR(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `AFR(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + 
+    `wean mass(g)` + `litters/year` + `mass(g)`, data = d1_NEW)
+
+Coefficients:
+    (Intercept)  `gestation(mo)`     `newborn(g)`    `weaning(mo)`  
+        2.49080          0.37062          0.03224          0.25834  
+ `wean mass(g)`   `litters/year`        `mass(g)`  
+       -0.03567         -1.09337          0.05419  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with an intercept-only model</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>m_null <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">AFR(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="dv">1</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m_null, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`AFR(mo)` ~ 1
+                Df Sum of Sq     RSS      AIC F value    Pr(&gt;F)    
+&lt;none&gt;                       221.266   16.727                      
+`gestation(mo)`  1    145.85  75.421 -202.987  394.49 &lt; 2.2e-16 ***
+`newborn(g)`     1    129.34  91.922 -162.230  287.05 &lt; 2.2e-16 ***
+`weaning(mo)`    1    132.38  88.883 -169.156  303.84 &lt; 2.2e-16 ***
+`wean mass(g)`   1    134.59  86.679 -174.327  316.75 &lt; 2.2e-16 ***
+`litters/year`   1    150.73  70.539 -216.772  435.90 &lt; 2.2e-16 ***
+`mass(g)`        1    131.10  90.169 -166.196  296.60 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">update</span>(m_null, <span class="at">formula =</span> .<span class="sc">~</span>. <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> ) <span class="co"># litters/year has a higher F value</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `AFR(mo)` ~ `litters/year`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.71724 -0.31529  0.05765  0.38577  2.24331 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     4.64857    0.09867   47.11   &lt;2e-16 ***
+`litters/year` -2.18637    0.10472  -20.88   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.588 on 204 degrees of freedom
+Multiple R-squared:  0.6812,    Adjusted R-squared:  0.6796 
+F-statistic: 435.9 on 1 and 204 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m1, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`AFR(mo)` ~ `litters/year`
+                Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;                       70.539 -216.77                      
+`gestation(mo)`  1    25.680 44.859 -308.02 116.212 &lt; 2.2e-16 ***
+`newborn(g)`     1    21.017 49.522 -287.64  86.154 &lt; 2.2e-16 ***
+`weaning(mo)`    1    15.397 55.142 -265.50  56.681 1.644e-12 ***
+`wean mass(g)`   1    19.055 51.484 -279.64  75.132 1.399e-15 ***
+`mass(g)`        1    17.738 52.801 -274.44  68.197 1.878e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">update</span>(m1, <span class="at">formula =</span> .<span class="sc">~</span>. <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span>) <span class="co"># gestation(mo) has the highest F value</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `AFR(mo)` ~ `litters/year` + `gestation(mo)`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.21324 -0.32179  0.03679  0.32594  1.78353 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      2.93530    0.17743   16.54   &lt;2e-16 ***
+`litters/year`  -1.34558    0.11442  -11.76   &lt;2e-16 ***
+`gestation(mo)`  0.70558    0.06545   10.78   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4701 on 203 degrees of freedom
+Multiple R-squared:  0.7973,    Adjusted R-squared:  0.7953 
+F-statistic: 399.1 on 2 and 203 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m2, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`AFR(mo)` ~ `litters/year` + `gestation(mo)`
+               Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;                      44.859 -308.02                      
+`newborn(g)`    1   0.39804 44.461 -307.85  1.8084 0.1802035    
+`weaning(mo)`   1   2.42251 42.436 -317.45 11.5313 0.0008239 ***
+`wean mass(g)`  1   0.53792 44.321 -308.50  2.4517 0.1189655    
+`mass(g)`       1   0.72721 44.132 -309.38  3.3286 0.0695622 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">update</span>(m2, <span class="at">formula =</span> .<span class="sc">~</span>. <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span>) <span class="co"># weaning(mo)  has the highest F value</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `AFR(mo)` ~ `litters/year` + `gestation(mo)` + `weaning(mo)`, 
+    data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.15144 -0.31031  0.01809  0.30130  1.73473 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      2.66168    0.19084  13.947  &lt; 2e-16 ***
+`litters/year`  -1.17093    0.12285  -9.532  &lt; 2e-16 ***
+`gestation(mo)`  0.57705    0.07420   7.777 3.73e-13 ***
+`weaning(mo)`    0.22457    0.06613   3.396 0.000824 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4583 on 202 degrees of freedom
+Multiple R-squared:  0.8082,    Adjusted R-squared:  0.8054 
+F-statistic: 283.7 on 3 and 202 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m3, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`AFR(mo)` ~ `litters/year` + `gestation(mo)` + `weaning(mo)`
+               Df Sum of Sq    RSS     AIC F value  Pr(&gt;F)  
+&lt;none&gt;                      42.436 -317.45                  
+`newborn(g)`    1    1.1129 41.323 -320.93  5.4131 0.02098 *
+`wean mass(g)`  1    0.9948 41.441 -320.34  4.8250 0.02919 *
+`mass(g)`       1    1.2327 41.204 -321.53  6.0134 0.01505 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">update</span>(m3, <span class="at">formula =</span> .<span class="sc">~</span>. <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>) <span class="co"># `mass(g)` has the highest F value</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `AFR(mo)` ~ `litters/year` + `gestation(mo)` + `weaning(mo)` + 
+    `mass(g)`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.12402 -0.29995  0.02412  0.31750  1.64356 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      2.41786    0.21313  11.345  &lt; 2e-16 ***
+`litters/year`  -1.07490    0.12751  -8.430 6.64e-15 ***
+`gestation(mo)`  0.40328    0.10195   3.956 0.000106 ***
+`weaning(mo)`    0.24998    0.06614   3.779 0.000207 ***
+`mass(g)`        0.04693    0.01914   2.452 0.015051 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4528 on 201 degrees of freedom
+Multiple R-squared:  0.8138,    Adjusted R-squared:  0.8101 
+F-statistic: 219.6 on 4 and 201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m4, <span class="at">scope =</span> . <span class="sc">~</span> . <span class="sc">+</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+`AFR(mo)` ~ `litters/year` + `gestation(mo)` + `weaning(mo)` + 
+    `mass(g)`
+               Df Sum of Sq    RSS     AIC F value Pr(&gt;F)
+&lt;none&gt;                      41.204 -321.53               
+`newborn(g)`    1  0.023244 41.180 -319.64  0.1129 0.7372
+`wean mass(g)`  1  0.016755 41.187 -319.61  0.0814 0.7758</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># `newborn(g)` has a higher F value, but the p-value is not significant</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Hence, once we add litters/year, gestation(mo), mass(g), and `weaning(mo)`, the addition of other predictors does not significantly improve the fit of the model. Therefore, the final, best model in this case is m4.</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is the best model using forward selection for AFC(mo)</span></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">AFR(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>`AFR(mo)` ~ `gestation(mo)` + `weaning(mo)` + `mass(g)` + `litters/year`</code></pre>
+</div>
+</div>
+<ul>
+<li><p>For each of the two response variables, indicate what is the best model overall based on AICc and how many models have a delta AICc of 4 or less.</p></li>
+<li><p>What variables, if any, appear in all of this set of “top” models?</p></li>
+<li><p>Calculate and plot the model-averaged coefficients and their CIs across this set of top models.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using AIC model selection with the MASS package for model selction</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model selection for max. life (mo) response variable using AIC</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>m_full_max_life <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>)</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>s_max_life <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(m_full_max_life, <span class="at">scope =</span> .<span class="sc">~</span>., <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-322.33
+`max. life(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + 
+    `wean mass(g)` + `litters/year` + `mass(g)`
+
+                  Df Sum of Sq    RSS     AIC
+- `wean mass(g)`   1   0.05258 40.307 -324.06
+- `newborn(g)`     1   0.22940 40.484 -323.16
+&lt;none&gt;                         40.255 -322.33
+- `mass(g)`        1   0.76423 41.019 -320.45
+- `weaning(mo)`    1   1.34613 41.601 -317.55
+- `gestation(mo)`  1   1.55398 41.809 -316.52
+- `litters/year`   1   2.67967 42.934 -311.05
+
+Step:  AIC=-324.06
+`max. life(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + 
+    `litters/year` + `mass(g)`
+
+                  Df Sum of Sq    RSS     AIC
+- `newborn(g)`     1   0.17696 40.484 -325.15
+&lt;none&gt;                         40.307 -324.06
++ `wean mass(g)`   1   0.05258 40.255 -322.33
+- `weaning(mo)`    1   1.39845 41.706 -319.03
+- `gestation(mo)`  1   1.56245 41.870 -318.22
+- `mass(g)`        1   2.04649 42.354 -315.85
+- `litters/year`   1   2.82626 43.133 -312.10
+
+Step:  AIC=-325.15
+`max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + `litters/year` + 
+    `mass(g)`
+
+                  Df Sum of Sq    RSS     AIC
+&lt;none&gt;                         40.484 -325.15
++ `newborn(g)`     1    0.1770 40.307 -324.06
++ `wean mass(g)`   1    0.0001 40.484 -323.16
+- `weaning(mo)`    1    1.7588 42.243 -318.39
+- `gestation(mo)`  1    1.7910 42.275 -318.24
+- `litters/year`   1    3.3248 43.809 -310.90
+- `mass(g)`        1    5.2302 45.714 -302.13</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(s_max_life)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + 
+    `litters/year` + `mass(g)`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.50260 -0.24177 -0.03091  0.31814  1.12951 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      4.05576    0.21126  19.198  &lt; 2e-16 ***
+`gestation(mo)`  0.30133    0.10105   2.982  0.00322 ** 
+`weaning(mo)`    0.19375    0.06556   2.955  0.00350 ** 
+`litters/year`  -0.51352    0.12639  -4.063 6.95e-05 ***
+`mass(g)`        0.09666    0.01897   5.096 7.98e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4488 on 201 degrees of freedom
+Multiple R-squared:  0.7567,    Adjusted R-squared:  0.7519 
+F-statistic: 156.3 on 4 and 201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Starting with the full model, removing wean mass(g) and newborn(g) as their exclusion decreases the AIC.</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>m_full_max_life <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span>)</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>s_max_life <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(m_full_max_life, <span class="at">scope =</span> .<span class="sc">~</span>., <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-325.15
+`max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + `mass(g)` + 
+    `litters/year`
+
+                  Df Sum of Sq    RSS     AIC
+&lt;none&gt;                         40.484 -325.15
+- `weaning(mo)`    1    1.7588 42.243 -318.39
+- `gestation(mo)`  1    1.7910 42.275 -318.24
+- `litters/year`   1    3.3248 43.809 -310.90
+- `mass(g)`        1    5.2302 45.714 -302.13</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(s_max_life)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + 
+    `mass(g)` + `litters/year`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.50260 -0.24177 -0.03091  0.31814  1.12951 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      4.05576    0.21126  19.198  &lt; 2e-16 ***
+`gestation(mo)`  0.30133    0.10105   2.982  0.00322 ** 
+`weaning(mo)`    0.19375    0.06556   2.955  0.00350 ** 
+`mass(g)`        0.09666    0.01897   5.096 7.98e-07 ***
+`litters/year`  -0.51352    0.12639  -4.063 6.95e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4488 on 201 degrees of freedom
+Multiple R-squared:  0.7567,    Adjusted R-squared:  0.7519 
+F-statistic: 156.3 on 4 and 201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding or removing other variables does not decrease AIC further. Hence, the best model for max. life (mo) using AIC is:</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span>  <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>`max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + `mass(g)` + 
+    `litters/year`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The best model selection using AIC and the FORWARD SELECTION  above not  same for max.life(mo)</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Model selection for AFR (mo) response variable</span></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>m_full_AFR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">AFR(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>)</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>s_AFR <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(m_full_AFR, <span class="at">scope =</span> .<span class="sc">~</span>., <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-317.89
+`AFR(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + 
+    `wean mass(g)` + `litters/year` + `mass(g)`
+
+                  Df Sum of Sq    RSS     AIC
+- `wean mass(g)`   1    0.0502 41.180 -319.64
+- `newborn(g)`     1    0.0566 41.187 -319.61
+- `mass(g)`        1    0.1832 41.313 -318.98
+&lt;none&gt;                         41.130 -317.89
+- `gestation(mo)`  1    1.3805 42.511 -313.09
+- `weaning(mo)`    1    2.9200 44.050 -305.76
+- `litters/year`   1   14.0599 55.190 -259.32
+
+Step:  AIC=-319.64
+`AFR(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + 
+    `litters/year` + `mass(g)`
+
+                  Df Sum of Sq    RSS     AIC
+- `newborn(g)`     1    0.0232 41.204 -321.53
+- `mass(g)`        1    0.1431 41.323 -320.93
+&lt;none&gt;                         41.180 -319.64
++ `wean mass(g)`   1    0.0502 41.130 -317.89
+- `gestation(mo)`  1    1.3733 42.554 -314.88
+- `weaning(mo)`    1    2.8774 44.058 -307.73
+- `litters/year`   1   14.0809 55.261 -261.06
+
+Step:  AIC=-321.53
+`AFR(mo)` ~ `gestation(mo)` + `weaning(mo)` + `litters/year` + 
+    `mass(g)`
+
+                  Df Sum of Sq    RSS     AIC
+&lt;none&gt;                         41.204 -321.53
++ `newborn(g)`     1    0.0232 41.180 -319.64
++ `wean mass(g)`   1    0.0168 41.187 -319.61
+- `mass(g)`        1    1.2327 42.436 -317.45
+- `weaning(mo)`    1    2.9280 44.132 -309.38
+- `gestation(mo)`  1    3.2078 44.411 -308.08
+- `litters/year`   1   14.5675 55.771 -261.16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(s_AFR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `AFR(mo)` ~ `gestation(mo)` + `weaning(mo)` + `litters/year` + 
+    `mass(g)`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.12402 -0.29995  0.02412  0.31750  1.64356 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      2.41786    0.21313  11.345  &lt; 2e-16 ***
+`gestation(mo)`  0.40328    0.10195   3.956 0.000106 ***
+`weaning(mo)`    0.24998    0.06614   3.779 0.000207 ***
+`litters/year`  -1.07490    0.12751  -8.430 6.64e-15 ***
+`mass(g)`        0.04693    0.01914   2.452 0.015051 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4528 on 201 degrees of freedom
+Multiple R-squared:  0.8138,    Adjusted R-squared:  0.8101 
+F-statistic: 219.6 on 4 and 201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Starting with the full model, removing wean mass(g) and newborn(g) as their exclusion decreases the AIC.</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>m_full_AFR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">AFR(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span>  <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span>)</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>s_AFR <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(m_full_AFR, <span class="at">scope =</span> .<span class="sc">~</span>., <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-321.53
+`AFR(mo)` ~ `gestation(mo)` + `weaning(mo)` + `mass(g)` + `litters/year`
+
+                  Df Sum of Sq    RSS     AIC
+&lt;none&gt;                         41.204 -321.53
+- `mass(g)`        1    1.2327 42.436 -317.45
+- `weaning(mo)`    1    2.9280 44.132 -309.38
+- `gestation(mo)`  1    3.2078 44.411 -308.08
+- `litters/year`   1   14.5675 55.771 -261.16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(s_AFR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = `AFR(mo)` ~ `gestation(mo)` + `weaning(mo)` + `mass(g)` + 
+    `litters/year`, data = d1_NEW)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.12402 -0.29995  0.02412  0.31750  1.64356 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      2.41786    0.21313  11.345  &lt; 2e-16 ***
+`gestation(mo)`  0.40328    0.10195   3.956 0.000106 ***
+`weaning(mo)`    0.24998    0.06614   3.779 0.000207 ***
+`mass(g)`        0.04693    0.01914   2.452 0.015051 *  
+`litters/year`  -1.07490    0.12751  -8.430 6.64e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4528 on 201 degrees of freedom
+Multiple R-squared:  0.8138,    Adjusted R-squared:  0.8101 
+F-statistic: 219.6 on 4 and 201 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding or removing other variables does not decrease AIC further. Hence, the best model for AFR(mo) based on AIC is:</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a> <span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span>  <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at"> mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>`max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + ` mass(g)` + 
+    `litters/year`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The best model selection using AIC and the FORWARD SELECTION  above are the same for AFR(mo)</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find Average coefficients for top models:</span></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">library</span>(MuMIn)</span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a><span class="co"># For max.life(mo) response variable</span></span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a>m1_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">max. life(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>,</span>
+<span id="cb101-9"><a href="#cb101-9" aria-hidden="true" tabindex="-1"></a><span class="at">na.action =</span> na.fail)</span>
+<span id="cb101-10"><a href="#cb101-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-11"><a href="#cb101-11" aria-hidden="true" tabindex="-1"></a>mods <span class="ot">&lt;-</span> <span class="fu">dredge</span>(m1_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Fixed term is "(Intercept)"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>delta.aicc <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>mods.avg <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">model.avg</span>(mods, <span class="at">subset =</span> delta.aicc <span class="sc">&lt;=</span> <span class="dv">4</span>, <span class="at">fit =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mods.avg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+model.avg(object = get.models(object = mods, subset = delta.aicc &lt;= 
+    4))
+
+Component model call: 
+lm(formula = `max. life(mo)` ~ &lt;64 unique rhs&gt;, data = d1_NEW, 
+     na.action = na.fail)
+
+Component models: 
+       df  logLik   AICc  delta weight
+1236    6 -124.72 261.87   0.00   0.37
+12346   7 -124.27 263.11   1.24   0.20
+12356   7 -124.72 264.01   2.14   0.13
+1256    6 -126.25 264.93   3.06   0.08
+123456  8 -124.14 265.01   3.14   0.08
+12456   7 -126.08 266.72   4.85   0.03
+1234    6 -127.79 267.99   6.12   0.02
+123     5 -129.10 268.51   6.64   0.01
+256     5 -129.17 268.64   6.77   0.01
+236     5 -129.18 268.67   6.80   0.01
+2346    6 -128.19 268.80   6.93   0.01
+2356    6 -128.37 269.16   7.29   0.01
+12345   7 -127.53 269.62   7.75   0.01
+2456    6 -128.74 269.90   8.03   0.01
+1235    6 -129.10 270.62   8.75   0.00
+23456   7 -128.04 270.65   8.77   0.00
+1246    6 -129.37 271.17   9.30   0.00
+125     5 -130.49 271.29   9.42   0.00
+1245    6 -129.66 271.75   9.88   0.00
+246     5 -130.73 271.77   9.89   0.00
+1346    6 -131.25 274.93  13.06   0.00
+136     5 -132.85 276.01  14.14   0.00
+13456   7 -130.78 276.12  14.25   0.00
+1356    6 -132.85 278.12  16.25   0.00
+124     5 -134.09 278.48  16.61   0.00
+1456    6 -133.83 280.08  18.21   0.00
+156     5 -134.96 280.22  18.35   0.00
+36      4 -137.03 282.26  20.39   0.00
+356     5 -136.21 282.72  20.85   0.00
+56      4 -137.47 283.14  21.27   0.00
+346     5 -136.78 283.86  21.99   0.00
+126     5 -137.24 284.78  22.91   0.00
+3456    6 -136.21 284.84  22.97   0.00
+456     5 -137.47 285.24  23.37   0.00
+25      4 -138.74 285.68  23.81   0.00
+245     5 -138.07 286.43  24.56   0.00
+234     5 -138.33 286.95  25.08   0.00
+12      4 -139.38 286.96  25.09   0.00
+235     5 -138.47 287.23  25.36   0.00
+2345    6 -137.86 288.15  26.28   0.00
+24      4 -140.12 288.44  26.57   0.00
+23      4 -140.52 289.25  27.38   0.00
+1345    6 -138.61 289.65  27.78   0.00
+134     5 -139.70 289.71  27.84   0.00
+146     5 -141.51 293.33  31.46   0.00
+46      4 -142.98 294.17  32.30   0.00
+145     5 -142.59 295.48  33.61   0.00
+13      4 -145.33 298.87  37.00   0.00
+135     5 -145.33 300.96  39.09   0.00
+15      4 -147.48 303.16  41.29   0.00
+16      4 -152.00 312.20  50.33   0.00
+14      4 -156.23 320.65  58.78   0.00
+5       3 -160.32 326.77  64.90   0.00
+35      4 -159.86 327.91  66.04   0.00
+45      4 -160.31 328.81  66.94   0.00
+1       3 -161.86 329.85  67.98   0.00
+345     5 -159.82 329.95  68.08   0.00
+3       3 -163.20 332.51  70.64   0.00
+34      4 -162.35 332.89  71.02   0.00
+4       3 -170.00 346.13  84.25   0.00
+26      4 -169.12 346.44  84.57   0.00
+2       3 -188.14 382.41 120.54   0.00
+6       3 -194.48 395.08 133.21   0.00
+(Null)  2 -270.33 544.71 282.84   0.00
+
+Term codes: 
+`gestation(mo)`  `litters/year`       `mass(g)`    `newborn(g)`  `wean mass(g)` 
+              1               2               3               4               5 
+  `weaning(mo)` 
+              6 
+
+Model-averaged coefficients:  
+(full average) 
+                Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    
+(Intercept)      4.03834    0.26059     0.26184  15.423  &lt; 2e-16 ***
+`gestation(mo)`  0.31636    0.15292     0.15344   2.062  0.03923 *  
+`litters/year`  -0.51413    0.13366     0.13440   3.826  0.00013 ***
+`mass(g)`        0.09129    0.05382     0.05396   1.692  0.09066 .  
+`weaning(mo)`    0.18406    0.07972     0.08004   2.300  0.02147 *  
+`newborn(g)`    -0.01697    0.04567     0.04582   0.370  0.71108    
+`wean mass(g)`   0.02033    0.05340     0.05353   0.380  0.70419    
+ 
+(conditional average) 
+                Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    
+(Intercept)      4.03834    0.26059     0.26184  15.423  &lt; 2e-16 ***
+`gestation(mo)`  0.33659    0.13442     0.13506   2.492  0.01269 *  
+`litters/year`  -0.51485    0.13237     0.13311   3.868  0.00011 ***
+`mass(g)`        0.10672    0.04171     0.04192   2.546  0.01090 *  
+`weaning(mo)`    0.19357    0.06959     0.06997   2.767  0.00567 ** 
+`newborn(g)`    -0.04630    0.06582     0.06610   0.700  0.48364    
+`wean mass(g)`   0.05506    0.07623     0.07649   0.720  0.47164    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For max.life (mo) response variables , five -component (5) models have a delta value of 4 or less than 4</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="co"># based on the  output, gestation(mo), litters/year, and weaning(mo) appear in all of the top models. These variables have term codes 1, 2, and 6, respectively. Therefore, we can  conclude that these three variables consistently appear in the "top" models.</span></span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Return a table of summary stats for models included in average</span></span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a>mods.avg<span class="sc">$</span>msTable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df    logLik     AICc      delta       weight
+1236    6 -124.7240 261.8701   0.000000 3.700806e-01
+12346   7 -124.2728 263.1112   1.241127 1.989707e-01
+12356   7 -124.7237 264.0130   2.142867 1.267590e-01
+1256    6 -126.2537 264.9295   3.059383 8.016038e-02
+123456  8 -124.1384 265.0077   3.137554 7.708771e-02
+12456   7 -126.0755 266.7166   4.846459 3.280206e-02
+1234    6 -127.7858 267.9936   6.123506 1.732183e-02
+123     5 -129.1043 268.5086   6.638534 1.338927e-02
+256     5 -129.1690 268.6380   6.767854 1.255092e-02
+236     5 -129.1826 268.6653   6.795167 1.238069e-02
+2346    6 -128.1900 268.8021   6.931984 1.156206e-02
+2356    6 -128.3711 269.1643   7.294234 9.646584e-03
+12345   7 -127.5264 269.6184   7.748306 7.687287e-03
+2456    6 -128.7372 269.8965   8.026392 6.689405e-03
+1235    6 -129.0997 270.6216   8.751446 4.655261e-03
+23456   7 -128.0397 270.6451   8.774957 4.600857e-03
+1246    6 -129.3739 271.1699   9.299810 3.538900e-03
+125     5 -130.4929 271.2858   9.415654 3.339744e-03
+1245    6 -129.6620 271.7461   9.875983 2.653101e-03
+246     5 -130.7325 271.7650   9.894909 2.628114e-03
+1346    6 -131.2530 274.9281  13.057962 5.405004e-04
+136     5 -132.8534 276.0069  14.136746 3.151672e-04
+13456   7 -130.7763 276.1182  14.248134 2.980940e-04
+1356    6 -132.8503 278.1226  16.252507 1.094232e-04
+124     5 -134.0887 278.4775  16.607378 9.163261e-05
+1456    6 -133.8313 280.0848  18.214685 4.102304e-05
+156     5 -134.9596 280.2192  18.349084 3.835689e-05
+36      4 -137.0325 282.2640  20.393841 1.379845e-05
+356     5 -136.2097 282.7194  20.849274 1.098839e-05
+56      4 -137.4723 283.1437  21.273552 8.887982e-06
+346     5 -136.7783 283.8566  21.986450 6.222993e-06
+126     5 -137.2386 284.7772  22.907098 3.927202e-06
+3456    6 -136.2089 284.8399  22.969804 3.805983e-06
+456     5 -137.4691 285.2383  23.368146 3.118660e-06
+25      4 -138.7387 285.6764  23.806286 2.505111e-06
+245     5 -138.0667 286.4335  24.563379 1.715641e-06
+234     5 -138.3266 286.9532  25.083044 1.323069e-06
+12      4 -139.3804 286.9598  25.089704 1.318671e-06
+235     5 -138.4666 287.2331  25.363038 1.150225e-06
+2345    6 -137.8625 288.1470  26.276907 7.283472e-07
+24      4 -140.1183 288.4355  26.565413 6.305076e-07
+23      4 -140.5237 289.2464  27.376292 4.203491e-07
+1345    6 -138.6146 289.6514  27.781274 3.432966e-07
+134     5 -139.7043 289.7086  27.838465 3.336187e-07
+146     5 -141.5141 293.3282  31.458097 5.460813e-08
+46      4 -142.9831 294.1651  32.295038 3.593502e-08
+145     5 -142.5889 295.4779  33.607783 1.864056e-08
+13      4 -145.3350 298.8689  36.998801 3.420651e-09
+135     5 -145.3282 300.9564  39.086316 1.204511e-09
+15      4 -147.4793 303.1576  41.287509 4.007077e-10
+16      4 -151.9988 312.1965  50.326429 4.365673e-12
+14      4 -156.2279 320.6549  58.784762 6.358395e-14
+5       3 -160.3234 326.7657  64.895586 2.995014e-15
+35      4 -159.8563 327.9117  66.041555 1.688709e-15
+45      4 -160.3076 328.8141  66.944028 1.075438e-15
+1       3 -161.8633 329.8454  67.975278 6.421734e-16
+345     5 -159.8239 329.9478  68.077662 6.101265e-16
+3       3 -163.1955 332.5099  70.639765 1.694596e-16
+34      4 -162.3456 332.8902  71.020087 1.401136e-16
+4       3 -170.0031 346.1251  84.254944 1.873130e-19
+26      4 -169.1205 346.4401  84.569976 1.600145e-19
+2       3 -188.1446 382.4081 120.537958 2.476347e-27
+6       3 -194.4782 395.0752 133.205067 4.397274e-30
+(Null)  2 -270.3254 544.7099 282.839811 1.413877e-62</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># code below averages beta coefficients for models in the 95% confidence set</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>(mods.avg <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">model.avg</span>(mods, <span class="at">subset =</span> <span class="fu">cumsum</span>(weight) <span class="sc">&lt;=</span> <span class="fl">0.95</span>, <span class="at">fit =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+model.avg(object = get.models(object = mods, subset = cumsum(weight) &lt;= 
+    0.95))
+
+Component model call: 
+lm(formula = `max. life(mo)` ~ &lt;10 unique rhs&gt;, data = d1_NEW, 
+     na.action = na.fail)
+
+Component models: 
+       df  logLik   AICc delta weight
+1236    6 -124.72 261.87  0.00   0.39
+12346   7 -124.27 263.11  1.24   0.21
+12356   7 -124.72 264.01  2.14   0.13
+1256    6 -126.25 264.93  3.06   0.09
+123456  8 -124.14 265.01  3.14   0.08
+12456   7 -126.08 266.72  4.85   0.03
+1234    6 -127.79 267.99  6.12   0.02
+123     5 -129.10 268.51  6.64   0.01
+256     5 -129.17 268.64  6.77   0.01
+236     5 -129.18 268.67  6.80   0.01
+
+Term codes: 
+`gestation(mo)`  `litters/year`       `mass(g)`    `newborn(g)`  `wean mass(g)` 
+              1               2               3               4               5 
+  `weaning(mo)` 
+              6 
+
+Model-averaged coefficients:  
+(full average) 
+                Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    
+(Intercept)      4.02758    0.25212     0.25342  15.893  &lt; 2e-16 ***
+`gestation(mo)`  0.32481    0.14094     0.14153   2.295 0.021738 *  
+`litters/year`  -0.51090    0.13089     0.13164   3.881 0.000104 ***
+`mass(g)`        0.09326    0.05266     0.05281   1.766 0.077385 .  
+`weaning(mo)`    0.18425    0.07511     0.07545   2.442 0.014611 *  
+`newborn(g)`    -0.01882    0.04252     0.04268   0.441 0.659297    
+`wean mass(g)`   0.01872    0.05197     0.05210   0.359 0.719345    
+ 
+(conditional average) 
+                Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    
+(Intercept)      4.02758    0.25212     0.25342  15.893  &lt; 2e-16 ***
+`gestation(mo)`  0.33365    0.13213     0.13277   2.513 0.011975 *  
+`litters/year`  -0.51090    0.13089     0.13164   3.881 0.000104 ***
+`mass(g)`        0.10760    0.04070     0.04091   2.630 0.008536 ** 
+`weaning(mo)`    0.19046    0.06818     0.06857   2.778 0.005476 ** 
+`newborn(g)`    -0.05431    0.05737     0.05770   0.941 0.346589    
+`wean mass(g)`   0.05352    0.07654     0.07679   0.697 0.485875    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CIs for averaged beta coefficient estimates</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mods.avg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      2.5 %      97.5 %
+(Intercept)      3.53089345  4.52426633
+`gestation(mo)`  0.07341204  0.59388046
+`litters/year`  -0.76891687 -0.25287995
+`mass(g)`        0.02741634  0.18778776
+`weaning(mo)`    0.05606604  0.32486292
+`newborn(g)`    -0.16741267  0.05878602
+`wean mass(g)`  -0.09699509  0.20402633</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the model-averaged coefficients and their CIs across this set of top models.</span></span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mods.avg, <span class="at">full =</span> <span class="cn">TRUE</span>, <span class="at">intercept =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Exercise-12_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For AFR(mo) response variable</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>m2_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> d1_NEW, <span class="st">`</span><span class="at">AFR(mo)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">gestation(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">newborn(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">weaning(mo)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">wean mass(g)</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">litters/year</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">mass(g)</span><span class="st">`</span>,</span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="at">na.action =</span> na.fail)</span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>mods <span class="ot">&lt;-</span> <span class="fu">dredge</span>(m2_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Fixed term is "(Intercept)"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>delta.aicc <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>mods.avg <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">model.avg</span>(mods, <span class="at">subset =</span> delta.aicc <span class="sc">&lt;=</span> <span class="dv">4</span>, <span class="at">fit =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mods.avg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+model.avg(object = get.models(object = mods, subset = delta.aicc &lt;= 
+    4))
+
+Component model call: 
+lm(formula = `AFR(mo)` ~ &lt;64 unique rhs&gt;, data = d1_NEW, na.action = 
+     na.fail)
+
+Component models: 
+       df  logLik   AICc  delta weight
+1236    6 -126.54 265.50   0.00   0.27
+1246    6 -126.84 266.10   0.60   0.20
+1256    6 -127.13 266.68   1.19   0.15
+12346   7 -126.48 267.53   2.03   0.10
+12356   7 -126.50 267.56   2.06   0.09
+12456   7 -126.81 268.19   2.69   0.07
+123456  8 -126.35 269.44   3.94   0.04
+126     5 -129.57 269.45   3.95   0.04
+246     5 -129.88 270.06   4.56   0.03
+2456    6 -129.77 271.97   6.47   0.01
+2346    6 -129.86 272.14   6.64   0.01
+23456   7 -129.76 274.08   8.58   0.00
+256     5 -133.41 277.12  11.62   0.00
+123     5 -133.61 277.52  12.02   0.00
+125     5 -134.05 278.40  12.90   0.00
+12      4 -135.29 278.78  13.29   0.00
+236     5 -134.26 278.82  13.32   0.00
+2356    6 -133.31 279.04  13.54   0.00
+124     5 -134.37 279.05  13.55   0.00
+1234    6 -133.44 279.30  13.80   0.00
+1235    6 -133.52 279.45  13.95   0.00
+1245    6 -134.04 280.49  15.00   0.00
+12345   7 -133.42 281.40  15.91   0.00
+24      4 -145.48 299.16  33.66   0.00
+234     5 -145.35 301.01  35.51   0.00
+245     5 -145.44 301.18  35.68   0.00
+2345    6 -145.35 303.12  37.62   0.00
+25      4 -149.48 307.16  41.66   0.00
+235     5 -149.47 309.23  43.74   0.00
+23      4 -152.08 312.36  46.87   0.00
+26      4 -156.55 321.30  55.80   0.00
+136     5 -157.72 325.74  60.24   0.00
+1346    6 -156.77 325.97  60.47   0.00
+1356    6 -157.71 327.84  62.34   0.00
+13456   7 -156.64 327.85  62.35   0.00
+156     5 -159.08 328.45  62.95   0.00
+1456    6 -158.53 329.49  63.99   0.00
+56      4 -163.32 334.84  69.34   0.00
+146     5 -162.35 334.99  69.50   0.00
+36      4 -163.59 335.38  69.89   0.00
+346     5 -162.65 335.60  70.11   0.00
+356     5 -162.75 335.79  70.29   0.00
+456     5 -162.97 336.24  70.75   0.00
+3456    6 -162.46 337.34  71.84   0.00
+46      4 -165.07 338.35  72.85   0.00
+16      4 -167.83 343.86  78.36   0.00
+134     5 -175.04 360.39  94.89   0.00
+1345    6 -174.26 360.94  95.44   0.00
+145     5 -177.20 364.69  99.20   0.00
+2       3 -181.92 369.95 104.45   0.00
+13      4 -181.28 370.75 105.26   0.00
+135     5 -181.20 372.71 107.21   0.00
+15      4 -182.59 373.38 107.88   0.00
+14      4 -187.40 383.00 117.50   0.00
+1       3 -188.81 383.73 118.24   0.00
+5       3 -203.14 412.39 146.90   0.00
+45      4 -203.07 414.34 148.84   0.00
+35      4 -203.09 414.38 148.88   0.00
+345     5 -203.03 416.36 150.86   0.00
+6       3 -205.72 417.57 152.07   0.00
+34      4 -205.30 418.80 153.31   0.00
+3       3 -207.20 420.53 155.03   0.00
+4       3 -209.19 424.49 158.99   0.00
+(Null)  2 -299.66 603.39 337.89   0.00
+
+Term codes: 
+`gestation(mo)`  `litters/year`       `mass(g)`    `newborn(g)`  `wean mass(g)` 
+              1               2               3               4               5 
+  `weaning(mo)` 
+              6 
+
+Model-averaged coefficients:  
+(full average) 
+                 Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    
+(Intercept)      2.518967   0.243649    0.244842  10.288  &lt; 2e-16 ***
+`gestation(mo)`  0.363739   0.153203    0.153737   2.366 0.017983 *  
+`litters/year`  -1.097822   0.130190    0.130946   8.384  &lt; 2e-16 ***
+`mass(g)`        0.023771   0.036383    0.036501   0.651 0.514902    
+`weaning(mo)`    0.257466   0.071297    0.071674   3.592 0.000328 ***
+`newborn(g)`     0.023790   0.043617    0.043736   0.544 0.586483    
+`wean mass(g)`   0.004665   0.036560    0.036710   0.127 0.898875    
+ 
+(conditional average) 
+                Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    
+(Intercept)      2.51897    0.24365     0.24484  10.288  &lt; 2e-16 ***
+`gestation(mo)`  0.38386    0.13055     0.13122   2.925 0.003440 ** 
+`litters/year`  -1.09782    0.13019     0.13095   8.384  &lt; 2e-16 ***
+`mass(g)`        0.04663    0.03913     0.03934   1.185 0.235953    
+`weaning(mo)`    0.25811    0.07022     0.07060   3.656 0.000256 ***
+`newborn(g)`     0.05264    0.05187     0.05210   1.010 0.312262    
+`wean mass(g)`   0.01280    0.05969     0.05994   0.214 0.830913    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For AFR(MO) response variables , eight component (8) models have a delta value of 4 or less than 4</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a><span class="co"># based on the  output, gestation(mo), litters/year, and weaning(mo) appear in all of the top models. These variables have term codes 1, 2, and 6, respectively. Therefore, we can  conclude that these three variables consistently appear in the "top" models.Additionally, </span></span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Return a table of summary stats for models included in average</span></span>
+<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a>mods.avg<span class="sc">$</span>msTable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df    logLik     AICc       delta       weight
+1236    6 -126.5382 265.4985   0.0000000 2.660387e-01
+1246    6 -126.8373 266.0967   0.5982211 1.972617e-01
+1256    6 -127.1312 266.6845   1.1860006 1.470307e-01
+12346   7 -126.4801 267.5258   2.0273017 9.654323e-02
+12356   7 -126.4963 267.5583   2.0597592 9.498910e-02
+12456   7 -126.8124 268.1904   2.6918887 6.924822e-02
+123456  8 -126.3546 269.4401   3.9415716 3.707178e-02
+126     5 -129.5745 269.4490   3.9504884 3.690686e-02
+246     5 -129.8775 270.0550   4.5565239 2.725889e-02
+2456    6 -129.7739 271.9700   6.4714872 1.046355e-02
+2346    6 -129.8590 272.1402   6.6416751 9.609999e-03
+23456   7 -129.7550 274.0757   8.5772187 3.651114e-03
+256     5 -133.4076 277.1152  11.6166827 7.987561e-04
+123     5 -133.6092 277.5184  12.0198915 6.529178e-04
+125     5 -134.0500 278.4001  12.9015752 4.201490e-04
+12      4 -135.2926 278.7843  13.2857425 3.467228e-04
+236     5 -134.2601 278.8202  13.3216348 3.405560e-04
+2356    6 -133.3071 279.0363  13.5377895 3.056688e-04
+124     5 -134.3746 279.0492  13.5506939 3.037029e-04
+1234    6 -133.4367 279.2954  13.7968903 2.685271e-04
+1235    6 -133.5156 279.4532  13.9547206 2.481508e-04
+1245    6 -134.0360 280.4942  14.9956624 1.474613e-04
+12345   7 -133.4192 281.4040  15.9054538 9.356628e-05
+24      4 -145.4791 299.1572  33.6586584 1.306351e-08
+234     5 -145.3545 301.0090  35.5105198 5.175274e-09
+245     5 -145.4417 301.1835  35.6849491 4.743037e-09
+2345    6 -145.3473 303.1167  37.6181340 1.804142e-09
+25      4 -149.4820 307.1630  41.6644356 2.385764e-10
+235     5 -149.4668 309.2337  43.7351487 8.471843e-11
+23      4 -152.0827 312.3644  46.8658365 1.770752e-11
+26      4 -156.5519 321.3029  55.8043357 2.028557e-13
+136     5 -157.7194 325.7388  60.2402647 2.207687e-14
+1346    6 -156.7734 325.9690  60.4704341 1.967691e-14
+1356    6 -157.7085 327.8392  62.3406527 7.724032e-15
+13456   7 -156.6408 327.8473  62.3487948 7.692651e-15
+156     5 -159.0765 328.4530  62.9545086 5.682598e-15
+1456    6 -158.5316 329.4853  63.9867808 3.391500e-15
+56      4 -163.3195 334.8379  69.3394278 2.333884e-16
+146     5 -162.3470 334.9939  69.4954164 2.158772e-16
+36      4 -163.5924 335.3839  69.8853296 1.776390e-16
+346     5 -162.6524 335.6048  70.1062636 1.590608e-16
+356     5 -162.7464 335.7927  70.2942277 1.447929e-16
+456     5 -162.9720 336.2441  70.7455429 1.155435e-16
+3456    6 -162.4598 337.3417  71.8431702 6.674191e-17
+46      4 -165.0748 338.3485  72.8500109 4.034279e-17
+16      4 -167.8294 343.8578  78.3592830 2.567099e-18
+134     5 -175.0440 360.3879  94.8893790 6.606599e-22
+1345    6 -174.2604 360.9429  95.4444108 5.005579e-22
+145     5 -177.1975 364.6949  99.1964229 7.668585e-23
+2       3 -181.9156 369.9500 104.4514359 5.541198e-24
+13      4 -181.2780 370.7549 105.2563994 3.705169e-24
+135     5 -181.2030 372.7060 107.2075242 1.396776e-24
+15      4 -182.5880 373.3750 107.8764843 9.996866e-25
+14      4 -187.4018 383.0027 117.5041402 8.114186e-27
+1       3 -188.8077 383.7341 118.2356188 5.628678e-27
+5       3 -203.1377 412.3943 146.8957292 3.364670e-33
+45      4 -203.0696 414.3383 148.8397447 1.272931e-33
+35      4 -203.0899 414.3789 148.8803478 1.247349e-33
+345     5 -203.0300 416.3601 150.8615774 4.632010e-34
+6       3 -205.7236 417.5660 152.0674401 2.534660e-34
+34      4 -205.3025 418.8039 153.3053898 1.364905e-34
+3       3 -207.2034 420.5257 155.0271296 5.770738e-35
+4       3 -209.1864 424.4916 158.9930924 7.943894e-36
+(Null)  2 -299.6650 603.3890 337.8905069 1.129675e-74</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># code below averages beta coefficients for models in the 95% confidence set</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>(mods.avg <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">model.avg</span>(mods, <span class="at">subset =</span> <span class="fu">cumsum</span>(weight) <span class="sc">&lt;=</span> <span class="fl">0.95</span>, <span class="at">fit =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+model.avg(object = get.models(object = mods, subset = cumsum(weight) &lt;= 
+    0.95))
+
+Component model call: 
+lm(formula = `AFR(mo)` ~ &lt;8 unique rhs&gt;, data = d1_NEW, na.action = 
+     na.fail)
+
+Component models: 
+       df  logLik   AICc delta weight
+1236    6 -126.54 265.50  0.00   0.28
+1246    6 -126.84 266.10  0.60   0.21
+1256    6 -127.13 266.68  1.19   0.16
+12346   7 -126.48 267.53  2.03   0.10
+12356   7 -126.50 267.56  2.06   0.10
+12456   7 -126.81 268.19  2.69   0.07
+123456  8 -126.35 269.44  3.94   0.04
+126     5 -129.57 269.45  3.95   0.04
+
+Term codes: 
+`gestation(mo)`  `litters/year`       `mass(g)`    `newborn(g)`  `wean mass(g)` 
+              1               2               3               4               5 
+  `weaning(mo)` 
+              6 
+
+Model-averaged coefficients:  
+(full average) 
+                 Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    
+(Intercept)      2.505181   0.237635    0.238860  10.488  &lt; 2e-16 ***
+`gestation(mo)`  0.383271   0.130083    0.130747   2.931 0.003374 ** 
+`litters/year`  -1.095135   0.129529    0.130288   8.405  &lt; 2e-16 ***
+`mass(g)`        0.025078   0.036487    0.036607   0.685 0.493302    
+`weaning(mo)`    0.253296   0.067554    0.067957   3.727 0.000194 ***
+`newborn(g)`     0.018847   0.038076    0.038212   0.493 0.621861    
+`wean mass(g)`   0.005186   0.036525    0.036675   0.141 0.887557    
+ 
+(conditional average) 
+                Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    
+(Intercept)      2.50518    0.23763     0.23886  10.488  &lt; 2e-16 ***
+`gestation(mo)`  0.38327    0.13008     0.13075   2.931 0.003374 ** 
+`litters/year`  -1.09513    0.12953     0.13029   8.405  &lt; 2e-16 ***
+`mass(g)`        0.04792    0.03807     0.03829   1.251 0.210794    
+`weaning(mo)`    0.25330    0.06755     0.06796   3.727 0.000194 ***
+`newborn(g)`     0.04452    0.04777     0.04802   0.927 0.353943    
+`wean mass(g)`   0.01407    0.05911     0.05937   0.237 0.812660    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CIs for averaged beta coefficient estimates</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mods.avg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      2.5 %     97.5 %
+(Intercept)      2.03702361  2.9733375
+`gestation(mo)`  0.12701087  0.6395314
+`litters/year`  -1.35049532 -0.8397746
+`mass(g)`       -0.02713175  0.1229639
+`weaning(mo)`    0.12010258  0.3864903
+`newborn(g)`    -0.04960712  0.1386380
+`wean mass(g)`  -0.10228580  0.1304248</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the model-averaged coefficients and their CIs across this set of top models.</span></span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mods.avg, <span class="at">full =</span> <span class="cn">TRUE</span>, <span class="at">intercept =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Exercise-12_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

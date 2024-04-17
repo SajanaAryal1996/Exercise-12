@@ -12,7 +12,7 @@ editor: visual
 
 -   Using the {tidyverse} `read_csv()` function, load the “Mammal_lifehistories_v2.txt” dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Mammal_lifehistories_v2.txt) as a “tibble” named **d**. As discussed in class, this is dataset that compiles life history and other variables for over 1400 species of placental mammals from 17 different Orders.
 
-```{r}
+```{r,warning=FALSE}
 library(tidyverse)
 f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Mammal_lifehistories_v2.txt"
 d <- read_tsv(f, col_names = TRUE)
@@ -25,7 +25,7 @@ head(d)
 
 Step 1:Replace all values of -999 (the authors’ code for missing data) with `NA`.
 
-```{r}
+```{r,warning=FALSE}
 
 library(tidyverse)
 library(naniar)
@@ -43,7 +43,7 @@ colnames(d1)
 
 Step 2:Drop the variables **litter size** and **refs**.
 
-```{r}
+```{r,warning=FALSE}
 
 library(tidyverse)
 library(dplyr)
@@ -61,7 +61,7 @@ head(d1)
 
 Step 3: Log transform **all** of the other numeric variables.
 
-```{r}
+```{r,warning=FALSE}
 library(dplyr)
 
 
@@ -73,7 +73,7 @@ colnames(d1)
 
 Step 4: Regress the (now log transformed) age \[**gestation(mo)**, **weaning(mo)**, **AFR(mo)** (age at first reproduction), and **max. life(mo)** (maximum lifespan)\] and mass \[**newborn(g)** and **wean mass(g)**\] variables on (now log transformed) overall body **mass(g)** and add the residuals to the dataframe as new variables (**relGest**, **relWean**, **relAFR**, **relLife**, **relNewbornMass**, and **relWeaningMass**).
 
-```{r}
+```{r,warning=FALSE}
 library(dplyr)
 library(broom)
 
@@ -100,7 +100,7 @@ Step 5: Plot residuals of max lifespan (**relLife**) in relation to **Order**. W
 
 -   Plot residuals of weaning mass (**relWeaningMass**) in relation to **Order**. Which mammalian orders have the have highest relative weaning mass?
 
-```{r}
+```{r,warning=FALSE}
 library(ggplot2)
 
 # Plot residuals of max lifespan (relLife) in relation to Order
@@ -148,7 +148,7 @@ Step 6:Run models and a model selection process to evaluate what (now log transf
 
 > **HINT:** Before running models, winnow your dataset to drop rows that are missing the respective response variable or any of the predictors, e.g., by using `drop_na()`.
 
-```{r}
+```{r,warning=FALSE}
 library(tidyr)
 library(dplyr)
 library(MuMIn)
@@ -243,7 +243,7 @@ add1(m4, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean 
 
 -   Calculate and plot the model-averaged coefficients and their CIs across this set of top models.
 
-```{r}
+```{r,warning=FALSE}
 
 # Using AIC model selection with the MASS package for model selction
 library(MASS)
