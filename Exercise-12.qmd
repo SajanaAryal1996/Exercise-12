@@ -1,0 +1,344 @@
+---
+title: "Exercise-12"
+format: html
+editor: visual
+---
+
+## 
+
+#### **Preliminaries**
+
+-   Set up a new ***GitHub*** repo in your ***GitHub*** workspace named “exercise-12” and clone that down to your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](https://difiore.github.io/ada-2024/06-module.html) will be helpful.
+
+-   Using the {tidyverse} `read_csv()` function, load the “Mammal_lifehistories_v2.txt” dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Mammal_lifehistories_v2.txt) as a “tibble” named **d**. As discussed in class, this is dataset that compiles life history and other variables for over 1400 species of placental mammals from 17 different Orders.
+
+```{r}
+library(tidyverse)
+f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Mammal_lifehistories_v2.txt"
+d <- read_tsv(f, col_names = TRUE)
+names(d)
+colnames(d)
+head(d)
+```
+
+## **Challenge**
+
+Step 1:Replace all values of -999 (the authors’ code for missing data) with `NA`.
+
+```{r}
+
+library(tidyverse)
+library(naniar)
+
+
+# Replace all values of -999 with NA
+d1 <- replace_with_na_all(d, condition = ~.x == -999) 
+# Check the first few rows of the resulting dataset
+head(d1)
+
+# Print the entire resulting dataset
+print(d1)
+colnames(d1)
+```
+
+Step 2:Drop the variables **litter size** and **refs**.
+
+```{r}
+
+library(tidyverse)
+library(dplyr)
+
+#drop variables as suggesteed
+d1 <- d1 %>%
+  select(-c("litter size", "refs"))
+
+# Check the structure of the resulting dataset
+str(d1)
+
+# Check the first few rows of the resulting dataset
+head(d1)
+```
+
+Step 3: Log transform **all** of the other numeric variables.
+
+```{r}
+library(dplyr)
+
+
+d1 <- d1 %>%
+  mutate(across(where(is.numeric), ~ log(. + 1)))
+print(d1)
+colnames(d1)
+```
+
+Step 4: Regress the (now log transformed) age \[**gestation(mo)**, **weaning(mo)**, **AFR(mo)** (age at first reproduction), and **max. life(mo)** (maximum lifespan)\] and mass \[**newborn(g)** and **wean mass(g)**\] variables on (now log transformed) overall body **mass(g)** and add the residuals to the dataframe as new variables (**relGest**, **relWean**, **relAFR**, **relLife**, **relNewbornMass**, and **relWeaningMass**).
+
+```{r}
+library(dplyr)
+library(broom)
+
+# d1 is the log transformed dataset
+# Perform the regressions and add residuals to the dataframe
+d1 <- d1 %>%
+  mutate(
+    relGest = resid(lm(`gestation(mo)` ~ `mass(g)`, na.action = na.exclude)),
+    relWean = resid(lm(`weaning(mo)` ~ `mass(g)`, na.action = na.exclude)),
+    relAFR = resid(lm(`AFR(mo)` ~ `mass(g)`, na.action = na.exclude)),
+    relLife = resid(lm(`max. life(mo)` ~ `mass(g)`, na.action = na.exclude)),
+    relNewbornMass = resid(lm(`newborn(g)` ~ `mass(g)`, na.action = na.exclude)),
+    relWeaningMass = resid(lm(`wean mass(g)` ~ `mass(g)`, na.action = na.exclude))
+  )
+
+# View the updated dataframe
+print(d1)
+
+```
+
+Step 5: Plot residuals of max lifespan (**relLife**) in relation to **Order**. Which mammalian orders have the highest residual lifespan?
+
+-   Plot residuals of newborn mass (**relNewbornMass**) in relation to **Order**. Which mammalian orders have the have highest residual newborn mass?
+
+-   Plot residuals of weaning mass (**relWeaningMass**) in relation to **Order**. Which mammalian orders have the have highest relative weaning mass?
+
+```{r}
+library(ggplot2)
+
+# Plot residuals of max lifespan (relLife) in relation to Order
+
+ggplot(d1, aes(x = order, y = relLife)) +
+  geom_boxplot(fill = "lightgreen", alpha = 0.5) +
+  geom_jitter(width = 0.1, alpha = 0.2) +  # Adding jitter points
+  labs(x = "Mammalian Order",
+       y = "Residual Max Lifespan") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+# Plot residuals of newborn mass
+ggplot(d1 %>% filter(!is.na(relNewbornMass)), aes(x = order, y = relNewbornMass)) +
+  geom_boxplot(fill = "lightblue", alpha = 0.5) +
+  geom_jitter(width = 0.1, alpha = 0.2) +  # Adding jitter points
+  labs(
+       x = "Mammalian Order",
+       y = "Residual Newborn Mass") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Plot residuals of weaning mass (relWeaningMass) in relation to Order
+
+ggplot(d1, aes(x = order, y = relWeaningMass)) +
+  geom_boxplot(fill = "lightblue", alpha = 0.5) +
+  geom_jitter(width = 0.1, alpha = 0.2) +  # Adding jitter points
+  labs(
+       x = "Mammalian Order",
+       y = "Residual Weaning Mass") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+-   From the above boxplot, it can be concluded 'Primates' mammalian order has highest residual lifespan.
+
+-   From the above boxplot, it can be concluded 'Rodentia' mammalian order has maximum newborn mass.
+
+-   From the above boxplot, it can be concluded 'Carnivora' mammalian order has highest weaning mass.
+
+Step 6:Run models and a model selection process to evaluate what (now log transformed) variables best predict each of the two response variables, **max. life(mo)** and **AFR(mo)**, from the set of the following predictors: **gestation(mo)**, **newborn(g)**, **weaning(mo)**, **wean mass(g)**, **litters/year**, and overall body **mass(g)**.
+
+> **HINT:** Before running models, winnow your dataset to drop rows that are missing the respective response variable or any of the predictors, e.g., by using `drop_na()`.
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(MuMIn)
+library(tidyverse)
+
+# Winnow the dataset to drop rows with missing values
+# Dropping rows with missing values for selected variables
+d1_NEW <- d1 |> drop_na(`max. life(mo)`, `AFR(mo)`, `gestation(mo)`, `newborn(g)`, `weaning(mo)`, `wean mass(g)`, `litters/year`, `mass(g)`)
+
+d1_NEW
+
+# Creating a linear regression model for max. life(mo)
+lm(data = d1_NEW, `max. life(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`)
+
+# FORWARD MODEL SELECTION for max. life(mo)
+# Start with an intercept-only model
+m_null <- lm(data = d1_NEW, `max. life(mo)` ~ 1) 
+add1(m_null, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+# Use add1() to test and add predictors:
+m1 <- update(m_null, formula = .~. + `wean mass(g)`) # wean mass (g) has a higher F value
+summary(m1)
+
+add1(m1, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+m2 <- update(m1, formula = .~. + `weaning(mo)` ) # weaning(mo) has the highest F value
+summary(m2)
+
+add1(m2, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+m3 <- update(m2, formula = .~. + `litters/year` ) # litters/year has the highest value
+summary(m3)
+
+add1(m3, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+m4 <- update(m3, formula = .~. + `gestation(mo)` ) # gestation(mo) has the highest F value
+summary(m4)
+
+add1(m4, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+ # mass (g) has high F value, but the results are not significant.
+
+# Hence, once we add gestation, litters/year, wean mass(g), and weaning(mo), the results do not significantly improve the fit of the model. Therefore, the final, best model in this case is m4
+
+# Here is the best model predicted using forward selection:
+`max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + `wean mass(g)` + `litters/year`
+summary(m4)
+
+# FORWARD MODEL SELECTION for AFR(mo) response variable
+# Creating a linear regression model
+lm(data = d1_NEW, `AFR(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`)
+
+# Start with an intercept-only model
+m_null <- lm(data = d1_NEW, `AFR(mo)` ~ 1)
+add1(m_null, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+m1 <- update(m_null, formula = .~. + `litters/year` ) # litters/year has a higher F value
+summary(m1)
+
+add1(m1, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+m2 <- update(m1, formula = .~. + `gestation(mo)`) # gestation(mo) has the highest F value
+summary(m2)
+
+add1(m2, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+m3 <- update(m2, formula = .~. + `weaning(mo)`) # weaning(mo)  has the highest F value
+summary(m3)
+
+add1(m3, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+m4 <- update(m3, formula = .~. + `mass(g)`) # `mass(g)` has the highest F value
+summary(m4)
+
+add1(m4, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+
+ # `newborn(g)` has a higher F value, but the p-value is not significant
+
+# Hence, once we add litters/year, gestation(mo), mass(g), and `weaning(mo)`, the addition of other predictors does not significantly improve the fit of the model. Therefore, the final, best model in this case is m4.
+
+# Here is the best model using forward selection for AFC(mo)
+
+`AFR(mo)` ~ `gestation(mo)` + `weaning(mo)` + `mass(g)` + `litters/year`
+
+
+
+```
+
+-   For each of the two response variables, indicate what is the best model overall based on AICc and how many models have a delta AICc of 4 or less.
+
+-   What variables, if any, appear in all of this set of “top” models?
+
+-   Calculate and plot the model-averaged coefficients and their CIs across this set of top models.
+
+```{r}
+
+# Using AIC model selection with the MASS package
+library(MASS)
+
+# Model selection for max. life (mo) response variable using AIC
+m_full_max_life <- lm(data = d1_NEW, `max. life(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`)
+
+s_max_life <- stepAIC(m_full_max_life, scope = .~., direction = "both")
+
+summary(s_max_life)
+
+
+# Starting with the full model, removing wean mass(g) and newborn(g) as their exclusion decreases the AIC.
+m_full_max_life <- lm(data = d1_NEW, `max. life(mo)` ~ `gestation(mo)` + `weaning(mo)` + `mass(g)` + `litters/year`)
+
+s_max_life <- stepAIC(m_full_max_life, scope = .~., direction = "both")
+summary(s_max_life)
+
+# Adding or removing other variables does not decrease AIC further. Hence, the best model for max. life (mo) using AIC is:
+`max. life(mo)` ~ `gestation(mo)`  + `weaning(mo)` + `mass(g)` + `litters/year`
+
+#The best model selection using AIC and the FORWARD SELECTION  above not  same for max.life(mo)
+
+# Model selection for AFR (mo) response variable
+m_full_AFR <- lm(data = d1_NEW, `AFR(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`)
+
+s_AFR <- stepAIC(m_full_AFR, scope = .~., direction = "both")
+summary(s_AFR)
+
+# Starting with the full model, removing wean mass(g) and newborn(g) as their exclusion decreases the AIC.
+m_full_AFR <- lm(data = d1_NEW, `AFR(mo)` ~ `gestation(mo)`  + `weaning(mo)` + `mass(g)` + `litters/year`)
+
+s_AFR <- stepAIC(m_full_AFR, scope = .~., direction = "both")
+summary(s_AFR)
+
+# Adding or removing other variables does not decrease AIC further. Hence, the best model for AFR(mo) based on AIC is:
+
+ `max. life(mo)` ~ `gestation(mo)`  + `weaning(mo)` + ` mass(g)` + `litters/year`
+
+# The best model selection using AIC and the FORWARD SELECTION  above are the same for AFR(mo)
+
+# Find Average coefficients for top models:
+
+ library(MuMIn)
+
+# For max.life(mo) response variable
+m1_full <- lm(data = d1_NEW, `max. life(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`,
+na.action = na.fail)
+
+mods <- dredge(m1_full)
+delta.aicc <- 4
+mods.avg <- summary(model.avg(mods, subset = delta.aicc <= 4, fit = TRUE))
+
+summary(mods.avg)
+# For max.life (mo) response variables , five  -component (5) models have a delta value of 4 or less than 4
+
+# based on the  output, gestation(mo), litters/year, and weaning(mo) appear in all of the top models. These variables have term codes 1, 2, and 6, respectively. Therefore, we can  conclude that these three variables consistently appear in the "top" models.
+
+# Return a table of summary stats for models included in average
+mods.avg$msTable
+
+# code below averages beta coefficients for models in the 95% confidence set
+(mods.avg <- summary(model.avg(mods, subset = cumsum(weight) <= 0.95, fit = TRUE)))
+# CIs for averaged beta coefficient estimates
+confint(mods.avg)
+
+#plot the model-averaged coefficients and their CIs across this set of top models.
+
+plot(mods.avg, full = TRUE, intercept = FALSE)
+
+# For AFR(mo) response variable
+m2_full <- lm(data = d1_NEW, `AFR(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`,
+na.action = na.fail)
+
+mods <- dredge(m2_full)
+delta.aicc <- 4
+
+mods.avg <- summary(model.avg(mods, subset = delta.aicc <= 4, fit = TRUE))
+
+summary(mods.avg)
+
+# For AFR(MO) response variables , eight component (8) models have a delta value of 4 or less than 4
+
+# based on the  output, gestation(mo), litters/year, and weaning(mo) appear in all of the top models. These variables have term codes 1, 2, and 6, respectively. Therefore, we can  conclude that these three variables consistently appear in the "top" models.
+
+
+# Return a table of summary stats for models included in average
+mods.avg$msTable
+
+# code below averages beta coefficients for models in the 95% confidence set
+(mods.avg <- summary(model.avg(mods, subset = cumsum(weight) <= 0.95, fit = TRUE)))
+# CIs for averaged beta coefficient estimates
+confint(mods.avg)
+
+#plot the model-averaged coefficients and their CIs across this set of top models.
+plot(mods.avg, full = TRUE, intercept = FALSE)
+
+```
