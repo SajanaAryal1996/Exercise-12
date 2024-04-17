@@ -245,7 +245,7 @@ add1(m4, scope = . ~ . + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean 
 
 ```{r}
 
-# Using AIC model selection with the MASS package
+# Using AIC model selection with the MASS package for model selction
 library(MASS)
 
 # Model selection for max. life (mo) response variable using AIC
@@ -298,7 +298,7 @@ delta.aicc <- 4
 mods.avg <- summary(model.avg(mods, subset = delta.aicc <= 4, fit = TRUE))
 
 summary(mods.avg)
-# For max.life (mo) response variables , five  -component (5) models have a delta value of 4 or less than 4
+# For max.life (mo) response variables , five -component (5) models have a delta value of 4 or less than 4
 
 # based on the  output, gestation(mo), litters/year, and weaning(mo) appear in all of the top models. These variables have term codes 1, 2, and 6, respectively. Therefore, we can  conclude that these three variables consistently appear in the "top" models.
 
@@ -327,7 +327,7 @@ summary(mods.avg)
 
 # For AFR(MO) response variables , eight component (8) models have a delta value of 4 or less than 4
 
-# based on the  output, gestation(mo), litters/year, and weaning(mo) appear in all of the top models. These variables have term codes 1, 2, and 6, respectively. Therefore, we can  conclude that these three variables consistently appear in the "top" models.
+# based on the  output, gestation(mo), litters/year, and weaning(mo) appear in all of the top models. These variables have term codes 1, 2, and 6, respectively. Therefore, we can  conclude that these three variables consistently appear in the "top" models.Additionally, 
 
 
 # Return a table of summary stats for models included in average
