@@ -103,7 +103,7 @@ Step 5: Plot residuals of max lifespan (**relLife**) in relation to **Order**. W
 ```{r,warning=FALSE}
 library(ggplot2)
 
-# Plot residuals of max lifespan (relLife) in relation to Order
+# Plot residuals of max lifespan (relLife) in relation to mammalian  Order
 
 ggplot(d1, aes(x = order, y = relLife)) +
   geom_boxplot(fill = "lightgreen", alpha = 0.5) +
@@ -115,7 +115,7 @@ ggplot(d1, aes(x = order, y = relLife)) +
 
 
 
-# Plot residuals of newborn mass
+# Plot residuals of newborn mass in relation to mammalian  Order
 ggplot(d1 %>% filter(!is.na(relNewbornMass)), aes(x = order, y = relNewbornMass)) +
   geom_boxplot(fill = "lightblue", alpha = 0.5) +
   geom_jitter(width = 0.1, alpha = 0.2) +  # Adding jitter points
@@ -125,7 +125,7 @@ ggplot(d1 %>% filter(!is.na(relNewbornMass)), aes(x = order, y = relNewbornMass)
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-# Plot residuals of weaning mass (relWeaningMass) in relation to Order
+# Plot residuals of weaning mass (relWeaningMass) in relation to mammalian Order
 
 ggplot(d1, aes(x = order, y = relWeaningMass)) +
   geom_boxplot(fill = "lightblue", alpha = 0.5) +
